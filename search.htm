@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+
+        <title>SelectedText 0.6 - Beispiel: Suche</title>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/selectedText-0.6.min.js"></script>
+
+        <script>
+
+$(function() {
+    $('.selectable').selectedText({
+	min: 3,
+	stop: function(text, e) {
+	    $('#search').css({
+		top: (e.pageY+10)+'px',
+		left: (e.pageX+10)+'px'
+	    }).show().children('input').val(text);
+	}
+    });
+    var timeout;
+    $('#search').mouseout(function() {
+	timeout = setTimeout(function() {
+	    $('#search').hide().children('input').val('');
+	}, 500);
+    }).mouseover(function() {
+	clearTimeout(timeout);
+    });
+    $('#search ul li a').click(function() {
+	var uri = $(this).attr('href'),
+	    query = $('#search input').val();
+	$('#search').hide().children('input').val('');
+	window.open(uri+'?q='+query);
+	return false;
+    });
+});
+
+        </script>
+
+        <style>
+
+            body {
+                margin:0;
+                padding:0;
+                width:640px;
+                font-family:Verdana, sans-serif;
+            }
+
+	    #search {
+		position:absolute;
+		top:0;
+		left:0;
+		width:150px;
+		background:#e8e8e8;
+		border:1px solid #999;
+		display:none;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		border-radius:3px;
+	    }
+
+	    #search ul {
+		padding:0;
+		margin:0;
+		width:150px;
+	    }
+
+	    #search ul li {
+		line-height:25px;
+		list-style:none;
+		border-top:1px solid #ccc;
+	    }
+
+	    #search ul li:first-child {
+		border:none;
+	    }
+
+	    #search ul li a {
+		padding:0 5px;
+		color:#000;
+		display:block;
+		text-decoration:none;
+	    }
+
+	    #search ul li a:hover {
+		background:#ddd;
+	    }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <p class="selectable">jQuery ist eine freie, umfangreiche JavaScript-Klassenbibliothek, welche komfortable Funktionen zur DOM-Manipulation und -Navigation zur Verfügung stellt. Die von John Resig entwickelte Klassenbibliothek wurde im Januar 2006 auf dem BarCamp (NYC) in New York veröffentlicht und wird laufend weiterentwickelt. Im September 2008 haben Microsoft und Nokia angekündigt, jQuery in ihren Produkten zu verwenden. Microsoft will jQuery in der Entwicklungsumgebung Visual Studio in Verbindung mit dem ASP.NET MVC Framework und ASP.NET Ajax verwenden und Nokia plant, es in seine Web-Runtime-Plattform zu integrieren. jQuery ist die meistverwendete JavaScript-Bibliothek.</p>
+
+	<div id="search">
+
+	    <input type="hidden" value="" />
+
+	    <ul>
+
+		<li>
+		    <a href="http://www.google.de/search">Google Suche</a>
+		</li>
+
+		<li>
+		    <a href="http://www.bing.com/search">Bing Suche</a>
+		</li>
+
+	    </ul>
+
+	</div>
+
+    </body>
+
+</html>
