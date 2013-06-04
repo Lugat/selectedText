@@ -1,12 +1,12 @@
 /**
 * selectedText v0.7
-* http://squareflower.de/downloads/jquery/selectedText/
+* https://github.com/Lugat/selectedText
 *
 * Copyright 2010, Lukas Rydygel
 * Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
 * http://creativecommons.org/licenses/by-sa/3.0/
 */
-;(function ($, window, document, undefined) {
+;(function($, window, document, undefined) {
 
   var PLUGIN_NAME = 'selectedText',
       PLUGIN_VERSION = '0.7',
