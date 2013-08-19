@@ -2,9 +2,8 @@
 * selectedText v0.7
 * https://github.com/Lugat/selectedText
 *
-* Copyright 2010, Lukas Rydygel
-* Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
-* http://creativecommons.org/licenses/by-sa/3.0/
+* Copyright (c) 2010 - 2013 Squareflower Websolutions - Lukas Rydygel
+* Licensed under the MIT license
 */
 ;(function($, window, document, undefined) {
 
