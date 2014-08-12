@@ -1,5 +1,5 @@
 /**
-* selectedText v1.0
+* selectedText v1.1
 * https://github.com/Lugat/selectedText
 *
 * Copyright (c) 2014 Squareflower Websolutions - Lukas Rydygel
@@ -26,7 +26,7 @@
     this.element = element;
     this.$element = $(element);
     
-    this.pressed = false;
+    this.current = null;
       
     this.setOptions(options);
     
@@ -39,11 +39,11 @@
     _init: function() {
       
       this.$element.bind('mousedown', (function(e) {
-        this._start(e);
+        this._start(this, e);
       }).bind(this)).bind('mousemove', (function(e) {
-        this._selecting(e);
+        this._selecting(this, e);
       }).bind(this)).bind('mouseup', (function(e) {
-        this._stop(e);
+        this._stop(this, e);
       }).bind(this));
       
     },
@@ -70,32 +70,32 @@
       }
     },
     
-    _start: function(e) {
+    _start: function(elem, e) {
 
-      this.pressed = true;
+      this.current = elem;
       this.opt.start(e);
 
     },
 
-    _selecting: function(e) {
+    _selecting: function(elem, e) {
 
       var text = this._getSelectedText();
 
-      if (this._checkLength(text.length) && this.pressed) {
+      if (this._checkLength(text.length) && this.current === elem) {
         this.opt.selecting(text, e)
       };
 
     },
 
-    _stop: function(e) {
+    _stop: function(elem, e) {
 
       var text = this._getSelectedText();
 
-      if (this._checkLength(text.length) && this.pressed) {
+      if (this._checkLength(text.length) && this.current === elem) {
         this.opt.stop(text, e);
       }
 
-      this.pressed = false;
+      delete this.current;
 
     },
 
