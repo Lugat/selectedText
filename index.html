@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8" />
+
+    <title>SelectedText1.0 - Beispiel: Search</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.selectedText-1.0.js"></script>
+    
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script>
+
+      $(function() {
+        $('.selectable').selectedText({
+          min: 3,
+          stop: function(text, e) {
+            $('#search').css({
+              top: (e.pageY)+'px',
+              left: (e.pageX)+'px'
+            }).show().find('input').val(text);
+          }
+        });
+        var timeout;
+        $('#search').mouseout(function() {
+          timeout = setTimeout(function() {
+            $('#search').hide().find('input').val('');
+          }, 500);
+        }).mouseover(function() {
+          clearTimeout(timeout);
+        });
+        $('#search a.btn').click(function() {
+          var uri = $(this).attr('href'),
+          query = $('#search input').val();
+          $('#search').hide().children('input').val('');
+          window.open(uri+'?q='+query);
+          return false;
+        });
+      });
+
+    </script>
+
+  </head>
+
+  <body>
+    
+    <div class="container">
+      
+      <h3>jQuer</h3>
+      
+      <div class="row">
+        
+        <div class="col-md-4">
+          
+          <p class="selectable">jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML. It was released in January 2006 at BarCamp NYC by John Resig. It is currently developed by a team of developers led by Dave Methvin. Used by over 60% of the 10,000 most visited websites, jQuery is the most popular JavaScript library in use today.</p>
+          
+        </div>
+        
+        <div class="col-md-4">
+          
+          <p class="selectable">jQuery is free, open source software, licensed under the MIT License. jQuery's syntax is designed to make it easier to navigate a document, select DOM elements, create animations, handle events, and develop Ajax applications. jQuery also provides capabilities for developers to create plug-ins on top of the JavaScript library. This enables developers to create abstractions for low-level interaction and animation, advanced effects and high-level, theme-able widgets. The modular approach to the jQuery library allows the creation of powerful dynamic web pages and web applications.</p>
+          
+        </div>
+        
+        <div class="col-md-4">
+          
+          <p class="selectable">The set of jQuery core features—DOM element selections, traversal and manipulation—enabled by its selector engine (named "Sizzle" from v1.3), created a new "programming style", fusing algorithms and DOM-data-structures. This style influenced the architecture of other JavaScript frameworks like YUI v3 and Dojo, later stimulating the creation of the standard Selectors API.</p>
+          
+        </div>
+        
+      </div>
+
+    </div>
+    
+    <div class="popover" id="search">
+      <h3 class="popover-title">Search on...</h3>
+      <div class="popover-content">
+
+        <input type="hidden" value="" />
+
+        <a href="http://www.google.com/search" class="btn btn-primary">Google</a>
+        <a href="http://www.yahoo.com/search" class="btn btn-primary">Yahoo</a>
+        <a href="http://www.bing.com/search" class="btn btn-primary">Bing</a>
+       
+      </div>
+    </div>
+
+  </body>
+
+</html>
